@@ -32,7 +32,7 @@ as Jenkins servers.
 - Create an IAM user with programmable access. Copy the Access Key ID and Secret.
 - Run `aws configure` via the AWS CLI and paste the Access Key ID and Secret.
 
-## Installation
+## Installation / Usage
 
 - Clone the repo
 `git clone git@github.com:fiifikrampah/AWS_Jenkins.git`
@@ -40,3 +40,4 @@ as Jenkins servers.
 `docker run -it --rm -v $(pwd)/AWS_Jenkins:/home fiifikay09/aws_infra_setup`
 - Alternatively, you can build the image locally and spin up a container with that image:
 `docker build -t <tag> . && docker run -it --rm -v $(pwd):/home <image>`
+- Run the bash script to provision the infrastructure: `./run.sh`
