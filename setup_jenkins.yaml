@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  become: yes
+  become: true
   remote_user: ec2-user
   become_user: root
   tasks:
@@ -56,7 +56,7 @@
         enabled: true
 
     - name: init Jenkins password
-      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
       changed_when: false
       register: result
 
@@ -65,7 +65,10 @@
         var: result.stdout
 
     - name: Set correct docker.sock permissions
-      shell: chmod 666 /var/run/docker.sock
+      file:
+        path: /var/run/docker.sock
+        mode: "0666"
 
     - name: Add jenkins user to docker group
-      shell: usermod -aG docker jenkins
+      command: usermod -aG docker jenkins
+      changed_when: false
